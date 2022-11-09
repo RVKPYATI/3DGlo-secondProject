@@ -22,13 +22,12 @@ const timer = (deadline) => {
         timerHours.textContent = getTime.hours;
         timerMinutes.textContent = getTime.minutes;
         timerSeconds.textContent = getTime.seconds;
-
-        if (getTime.timeRemaining > 0) {
-            setTimeout(updateClock, 1000);
+        if (getTime.timeRemaining < 0) {
+            clearInterval(startInterval);
         }
 
     };
-    updateClock();
+    const startInterval = setInterval(updateClock, 1000);
 
 };
 
