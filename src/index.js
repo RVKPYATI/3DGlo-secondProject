@@ -1,8 +1,6 @@
-import one from './modules/one';
-import two from './modules/two';
+import timer from './modules/timer';
 
 
 
+timer('15 november 2022');
 
-one();
-two();
