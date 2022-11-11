@@ -4,6 +4,8 @@ const timer = (deadline) => {
     const timerMinutes = document.querySelector('#timer-minutes');
     const timerSeconds = document.querySelector('#timer-seconds');
 
+    const formatter = new Intl.NumberFormat('ru', {style: "unit", unit: "day", unitDisplay: "long"});
+   
     const getTimeRemaining = () => {
 
         let dateStop = new Date(deadline).getTime();
@@ -25,7 +27,7 @@ const timer = (deadline) => {
 
     const updateClock = () => {
         let getTime = getTimeRemaining();
-        timerDays.textContent = getTime.days < 10 ? '0' + getTime.days : getTime.days;
+        timerDays.textContent = getTime.days < 10 ? '0' + formatter.format(getTime.days) : formatter.format(getTime.days);
         timerHours.textContent = getTime.hours < 10 ? '0' + getTime.hours : getTime.hours;
         timerMinutes.textContent = getTime.minutes < 10 ? '0' + getTime.minutes : getTime.minutes;
         timerSeconds.textContent = getTime.seconds < 10 ? '0' + getTime.seconds : getTime.seconds;
@@ -34,6 +36,7 @@ const timer = (deadline) => {
         }
 
     };
+    updateClock();
     const startInterval = setInterval(updateClock, 1000);
 
 };
