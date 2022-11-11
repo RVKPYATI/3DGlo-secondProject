@@ -5,7 +5,7 @@ const timer = (deadline) => {
     const timerSeconds = document.querySelector('#timer-seconds');
 
     const formatter = new Intl.NumberFormat('ru', {style: "unit", unit: "day", unitDisplay: "long"});
-   
+
     const getTimeRemaining = () => {
 
         let dateStop = new Date(deadline).getTime();
