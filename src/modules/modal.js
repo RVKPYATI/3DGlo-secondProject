@@ -6,7 +6,9 @@ const modal = () => {
     let step = 0;
 
     const modalAnimation = () => {
-
+        if(document.documentElement.clientWidth < 768) {
+            return false;
+        }
         step += 2;
         popupContent.style.left = '-38%';
         popupContent.style.left = 0 + step + '%';
@@ -15,7 +17,7 @@ const modal = () => {
             cancelAnimationFrame(anim);
             step = 0;
         }
-
+        
     };
 
     buttons.forEach(button => {
@@ -30,7 +32,7 @@ const modal = () => {
 
     });
 
-
+    console.log()
 };
 
 export default modal;
