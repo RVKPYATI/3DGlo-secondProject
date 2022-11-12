@@ -32,7 +32,6 @@ const modal = () => {
 
     });
 
-    console.log()
 };
 
 export default modal;
