@@ -27,17 +27,20 @@ const timer = (deadline) => {
 
     const updateClock = () => {
         let getTime = getTimeRemaining();
-        timerDays.textContent = getTime.days < 10 ? '0' + formatter.format(getTime.days) : formatter.format(getTime.days);
+        timerDays.textContent = '';
+        getTime.days && (timerDays.textContent = getTime.days < 10? '0' + formatter.format(getTime.days) : formatter.format(getTime.days));
         timerHours.textContent = getTime.hours < 10 ? '0' + getTime.hours : getTime.hours;
         timerMinutes.textContent = getTime.minutes < 10 ? '0' + getTime.minutes : getTime.minutes;
         timerSeconds.textContent = getTime.seconds < 10 ? '0' + getTime.seconds : getTime.seconds;
         if (getTime.timeRemaining < 0) {
             clearInterval(startInterval);
+            return false;
         }
-
+        return true;
     };
-    updateClock();
-    const startInterval = setInterval(updateClock, 1000);
+    let startInterval;
+    updateClock() && (startInterval = setInterval(updateClock, 1000));
+
 
 };
 
