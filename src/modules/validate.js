@@ -27,6 +27,7 @@ const validate = () => {
     validateForm(form1);
     validateForm(form2);
     validateForm(form3);
+    
 
 
 
