@@ -4,7 +4,7 @@ const calc = () => {
 
     calcInputs.forEach(input => {
         input.addEventListener('input', (e) => {
-            e.target.value = e.target.value.replace(/^\D+$/, '');
+            e.target.value = e.target.value.replace(/^\D+|\D$/g, '');
         });
     });
 
