@@ -7,18 +7,15 @@ const menu = () => {
         menu.classList.toggle('active-menu');
     };
 
-    menu.addEventListener('click', (e) => {
-        if(e.target.closest('close-btn')) {
+    document.addEventListener('click', (e) => {
+        if (e.target.closest('.menu') || e.target.classList.contains('close-btn') || e.target.closest('menu')) {
+            handlMenu();
+
+        } else {
             handlMenu();
         }
-        menuItems.forEach(menuItem => {
-            if (menuItem.closest('menu')) {
-                handlMenu();
-            }
-        });
-    });
 
-    menuBtn.addEventListener('click', handlMenu);
+    });
 
 };
 
