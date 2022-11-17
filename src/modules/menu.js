@@ -8,7 +8,7 @@ const menu = () => {
     };
 
     menu.addEventListener('click', (e) => {
-        if(e.target.classList.contains('close-btn')) {
+        if(e.target.closest('close-btn')) {
             handlMenu();
         }
         menuItems.forEach(menuItem => {
