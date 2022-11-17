@@ -9,17 +9,17 @@ const validate = () => {
         inputs.forEach(input => {
             if(input.type === 'text') {
                 input.addEventListener('input', (e) => {
-                    e.target.value = e.target.value.replace(/^[^а-яА-Я-\s]|[^а-яА-Я-\s]+$/, '');
+                    e.target.value = e.target.value.replaceAll(/[^а-яё-\s]/gi, '');
                 });
             }
             if(input.type === 'email') {
                 input.addEventListener('input', (e) => {
-                    e.target.value = e.target.value.replace(/^[^a-zA-Z0-9@*_!`\.\'-]|[^a-zA-Z0-9@*_!`\.\'-]+$/, '');
+                    e.target.value = e.target.value.replaceAll(/[^a-zA-Z0-9@*_!`\.\'-]/gi, '');
                 });
             }
             if(input.type === 'tel') {
                 input.addEventListener('input', (e) => {
-                    e.target.value = e.target.value.replace(/^[^0-9()-]|[^0-9()-]+$/, '');
+                    e.target.value = e.target.value.replaceAll(/[^0-9()-]/gi, '');
                 });
             }
         });

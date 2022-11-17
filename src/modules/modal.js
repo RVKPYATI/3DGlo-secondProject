@@ -1,7 +1,6 @@
 const modal = () => {
     const buttons = document.querySelectorAll('.popup-btn');
     const modal = document.querySelector('.popup');
-    const btnPopalClose = modal.querySelector('.popup-close');
     const popupContent = modal.querySelector('.popup-content');
     let step = 0;
 
@@ -27,9 +26,10 @@ const modal = () => {
         });
     });
 
-    btnPopalClose.addEventListener('click', () => {
-        modal.style.display = 'none';
-
+    modal.addEventListener('click', (e) => {
+        if(!e.target.closest('.popup-content') || e.target.classList.contains('popup-close')) {
+            modal.style.display = 'none';
+        }
     });
 
 };
