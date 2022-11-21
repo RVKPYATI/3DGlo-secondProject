@@ -8,6 +8,24 @@ const calc = (price = 100) => {
     const total = document.querySelector('#total');
 
 
+    const renderNum = (num, block) => {
+        const time = 500;
+        const step = 50;
+        let n = 0;
+        let timeTotal = Math.round(time / (num / step));
+        let interval = setInterval(() => {
+            n = n + step;
+            if (n > num) {
+                clearInterval(interval);
+            } else {
+                block.textContent = n;
+            }
+
+        }, timeTotal);
+
+    };
+
+
     const countCalc = () => {
         const calcTypeValue = +calcType.options[calcType.selectedIndex].value;
         const calcSquareValue = +calcSquare.value;
@@ -15,14 +33,14 @@ const calc = (price = 100) => {
         let totalValue = 0;
         let calcCountValue = 1;
         let calcDayValue = 1;
-        
+
         if (calcCount.value > 1) {
             calcCountValue += +calcCount.value / 10;
         }
 
-        if(calcDay.value && calcDay.value < 5) {
+        if (calcDay.value && calcDay.value < 5) {
             calcDayValue = 2;
-        } else if(calcDay.value && calcDay.value < 10) {
+        } else if (calcDay.value && calcDay.value < 10) {
             calcDayValue = 1.5;
         }
 
@@ -32,8 +50,8 @@ const calc = (price = 100) => {
             totalValue = 0;
         }
 
-        total.textContent = totalValue;
-        
+        renderNum(totalValue, total);
+
     };
 
     calcInputs.forEach(input => {
@@ -41,12 +59,13 @@ const calc = (price = 100) => {
             e.target.value = e.target.value.replace(/^\D+|\D$/g, '');
         });
     });
-    
+
     calcBlock.addEventListener('input', (e) => {
-        if(e.target === calcType || e.target === calcSquare || e.target === calcCount ||
+        e.preventDefault()
+        if (e.target === calcType || e.target === calcSquare || e.target === calcCount ||
             e.target === calcDay) {
-                countCalc();
-            }
+            countCalc();
+        }
     });
 
 
