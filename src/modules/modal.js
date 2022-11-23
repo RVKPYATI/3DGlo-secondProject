@@ -4,7 +4,6 @@ const modal = () => {
     const buttons = document.querySelectorAll('.popup-btn');
     const modal = document.querySelector('.popup');
     const popupContent = modal.querySelector('.popup-content');
-    let step = 0;
 
     buttons.forEach(button => {
         button.addEventListener('click', () => {
