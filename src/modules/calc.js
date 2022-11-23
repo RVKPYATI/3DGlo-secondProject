@@ -9,8 +9,8 @@ const calc = (price = 100) => {
 
 
     const renderNum = (num, block) => {
-        const time = 500;
-        const step = 50;
+        const time = 100;
+        const step = 100;
         let n = 0;
         let timeTotal = Math.round(time / (num / step));
         let interval = setInterval(() => {
@@ -19,12 +19,12 @@ const calc = (price = 100) => {
                 clearInterval(interval);
             } else {
                 block.textContent = n;
+                
             }
 
         }, timeTotal);
 
     };
-
 
     const countCalc = () => {
         const calcTypeValue = +calcType.options[calcType.selectedIndex].value;
@@ -34,6 +34,12 @@ const calc = (price = 100) => {
         let calcCountValue = 1;
         let calcDayValue = 1;
 
+        if(calcTypeValue === 1.4) {
+            price = 120;
+        } else if(calcTypeValue === 2) {
+            price = 110;
+        }
+
         if (calcCount.value > 1) {
             calcCountValue += +calcCount.value / 10;
         }
@@ -42,15 +48,17 @@ const calc = (price = 100) => {
             calcDayValue = 2;
         } else if (calcDay.value && calcDay.value < 10) {
             calcDayValue = 1.5;
-        }
+        } 
 
         if (calcType.value && calcSquare.value) {
             totalValue = price * calcTypeValue * calcSquareValue * calcCountValue * calcDayValue;
         } else {
             totalValue = 0;
         }
-
+        
+        //total.textContent = totalValue;
         renderNum(totalValue, total);
+        
 
     };
 
