@@ -9,7 +9,6 @@ const calc = (price = 100) => {
     const calcDay = document.querySelector('.calc-day');
     const total = document.querySelector('#total');
 
-
     const countCalc = () => {
         const calcTypeValue = +calcType.options[calcType.selectedIndex].value;
         const calcSquareValue = +calcSquare.value;
@@ -49,8 +48,6 @@ const calc = (price = 100) => {
                 total.textContent = Math.round(progress * totalValue);
             }
         });
-        
-
     };
 
     calcInputs.forEach(input => {
@@ -58,11 +55,12 @@ const calc = (price = 100) => {
             e.target.value = e.target.value.replace(/^\D+|\D$/g, '');
         });
     });
-
+   
     calcBlock.addEventListener('input', (e) => {
         if (e.target === calcType || e.target === calcSquare || e.target === calcCount ||
             e.target === calcDay) {
-            countCalc();
+                
+                countCalc();
         }
     });
 
