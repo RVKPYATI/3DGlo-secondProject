@@ -6,11 +6,11 @@ const calc = (price = 100) => {
     const calcCount = document.querySelector('.calc-count');
     const calcDay = document.querySelector('.calc-day');
     const total = document.querySelector('#total');
-
+    let timeout;
 
     const renderNum = (num, block) => {
-        const time = 500;
-        const step = 50;
+        const time = 1;
+        const step = 100;
         let n = 0;
         let timeTotal = Math.round(time / (num / step));
         let interval = setInterval(() => {
@@ -34,6 +34,14 @@ const calc = (price = 100) => {
         let calcCountValue = 1;
         let calcDayValue = 1;
 
+        if(calcTypeValue === 1.4) {
+            price = 120;
+        } else if(calcTypeValue === 2) {
+            price = 110;
+        } else if(calcTypeValue === 1) {
+            price = 100;
+        }
+
         if (calcCount.value > 1) {
             calcCountValue += +calcCount.value / 10;
         }
@@ -45,12 +53,19 @@ const calc = (price = 100) => {
         }
 
         if (calcType.value && calcSquare.value) {
+            // console.log('price',price)
+            // console.log('calcTypeValue',calcTypeValue)
+            // console.log('calcSquareValue',calcSquareValue)
+            // console.log('calcCountValue',calcCountValue)
+            // console.log('calcDayValue',calcDayValue)
             totalValue = price * calcTypeValue * calcSquareValue * calcCountValue * calcDayValue;
         } else {
             totalValue = 0;
         }
-
-        renderNum(totalValue, total);
+        
+        //renderNum(totalValue, total);
+        //total.textContent = renderNum(totalValue, total);
+        return totalValue;
 
     };
 
@@ -63,8 +78,17 @@ const calc = (price = 100) => {
     calcBlock.addEventListener('input', (e) => {
         if (e.target === calcType || e.target === calcSquare || e.target === calcCount ||
             e.target === calcDay) {
-            countCalc();
+                //total.textContent += e.data;
+                // total.textContent= renderNum(countCalc(),total);
+                console.log(e.which)
+                // clearTimeout(timeout);
+                // timeout = setTimeout(() => {
+                //     total.textContent= renderNum(countCalc(),total);
+                //   }, 500);
+                total.textContent = countCalc();
+
         }
+        
     });
 
 
