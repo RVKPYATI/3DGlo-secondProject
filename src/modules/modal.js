@@ -8,15 +8,17 @@ const modal = () => {
     buttons.forEach(button => {
         button.addEventListener('click', () => {
             modal.style.display = 'block';
-            animate({
-                duration: 300,
-                timing(timeFraction) {
-                    return timeFraction;
-                },
-                draw(progress) {
-                    popupContent.style.left = progress * 38 + '%';
-                }
-            });
+            if(document.documentElement.clientWidth > 768) {
+                animate({
+                    duration: 300,
+                    timing(timeFraction) {
+                        return timeFraction;
+                    },
+                    draw(progress) {
+                        popupContent.style.left = progress * 38 + '%';
+                    }
+                });
+            }
         });
     });
 
