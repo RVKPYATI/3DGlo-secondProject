@@ -8,10 +8,12 @@ const calc = (price = 100) => {
     const calcCount = document.querySelector('.calc-count');
     const calcDay = document.querySelector('.calc-day');
     const total = document.querySelector('#total');
+    
 
     const countCalc = () => {
         const calcTypeValue = +calcType.options[calcType.selectedIndex].value;
         const calcSquareValue = +calcSquare.value;
+        let preValue = +total.textContent;
 
         let totalValue = 0;
         let calcCountValue = 1;
@@ -45,7 +47,7 @@ const calc = (price = 100) => {
                 return timeFraction;
             },
             draw(progress) {
-                total.textContent = Math.round(progress * totalValue);
+                total.textContent = preValue + Math.round(progress * (totalValue-preValue));
             }
         });
     };
