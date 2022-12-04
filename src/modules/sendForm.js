@@ -1,16 +1,12 @@
+import { checkValidate } from "./checkValidate";
+
 export const sendForm = ({ formId, someElem = [] }) => {
     const form = document.querySelector(formId);
     const statusBlock = document.createElement('div');
-    const loadText = 'Загрузка...';
+    const loadText = document.createElement('div');
     const errorText = 'Ошибка...';
-    const successText = 'Спасибо! Наш менеджер с вами свяжется!';
+    const successText = '<h3>Спасибо! Наш менеджер с вами свяжется!</h3>';
 
-    const validate = (list) => {
-        let success = true;
-
-
-        return success;
-    };
 
     const sendData = (data) => {
         return fetch('https://jsonplaceholder.typicode.com/posts', {
@@ -27,8 +23,9 @@ export const sendForm = ({ formId, someElem = [] }) => {
 
         const formData = new FormData(form);
         const formBody = {};
-
-        statusBlock.textContent = loadText;
+        loadText.classList.add('loader');
+        statusBlock.append(loadText);
+        
         form.append(statusBlock);
 
         formData.forEach((val, key) => {
@@ -38,40 +35,41 @@ export const sendForm = ({ formId, someElem = [] }) => {
         someElem.forEach(elem => {
             const element = document.getElementById(elem.id);
 
-            if(elem.type === 'block') {
+            if (elem.type === 'block') {
                 formBody[elem.id] = element.textContent;
-            } else if(elem.type === 'input') {
+            } else if (elem.type === 'input') {
                 formBody[elem.id] = element.value;
             }
 
         });
-        
-        if(validate(formElements)) {
+
+        if (checkValidate(formElements)) {
             sendData(formBody)
-            .then(data => {
-                statusBlock.textContent = successText;
-                formElements.forEach(input => {
-                    input.value = '';
+                .then(data => {
+                    statusBlock.innerHTML = successText;
+                    formElements.forEach(input => {
+                        input.value = '';
+                    });
+                })
+                .catch(error => {
+                    statusBlock.textContent = errorText;
                 });
-            })
-            .catch(error => {
-                statusBlock.textContent = errorText;
-            });
         } else {
             alert('Данные не валидны');
         }
     };
 
     try {
-        if(!form) {
+        if (!form) {
             throw new Error('Верните форму на место, пожалуйста!');
         }
         form.addEventListener('submit', (e) => {
             e.preventDefault();
+
             submitForm();
-    
+
         });
-    } catch(error) {
+    } catch (error) {
         console.log(error.message);
     }
 

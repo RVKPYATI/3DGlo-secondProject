@@ -1,3 +1,5 @@
+import { checkValidate } from "./checkValidate";
+
 const validate = () => {
     
     const form1 = document.querySelector('#form1');
@@ -8,18 +10,25 @@ const validate = () => {
         const inputs = form.querySelectorAll('input');
         inputs.forEach(input => {
             if(input.type === 'text') {
-                input.addEventListener('input', (e) => {
-                    e.target.value = e.target.value.replaceAll(/[^а-яё-\s]/gi, '');
+                input.addEventListener('input', ({target}) => {
+                    target.value = target.value.replaceAll(/[^а-яё-\s]/gi, '');
+                    if(target.classList.contains('error') && checkValidate([target])) {
+                        target.classList.remove('error');
+                    }
                 });
             }
             if(input.type === 'email') {
-                input.addEventListener('input', (e) => {
-                    e.target.value = e.target.value.replaceAll(/[^a-zA-Z0-9@*_!`\.\'-]/gi, '');
+                input.addEventListener('input', ({target}) => {
+                    target.value = target.value.replaceAll(/[^a-zA-Z0-9@*_!`\.\'-]/gi, '');
+
+                    if(target.classList.contains('error') && checkValidate([target])) {
+                        target.classList.remove('error');
+                    }
                 });
             }
             if(input.type === 'tel') {
-                input.addEventListener('input', (e) => {
-                    e.target.value = e.target.value.replaceAll(/[^0-9()-]/gi, '');
+                input.addEventListener('input', ({target}) => {
+                    target.value = target.value.replaceAll(/[^0-9()-]/gi, '');
                 });
             }
         });

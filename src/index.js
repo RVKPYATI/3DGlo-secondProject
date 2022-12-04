@@ -6,6 +6,8 @@ import validate from './modules/validate';
 import { tabs } from './modules/tabs';
 import { slider } from './modules/slider';
 import { sendForm } from './modules/sendForm';
+import { checkValidate } from './modules/checkValidate';
+import maskPhone from './modules/maskPhone';
 
 timer('31 december 2022');
 menu();
@@ -23,4 +25,24 @@ sendForm({
         }
     ]
 });
+sendForm({
+    formId: '#form2', 
+    someElem: [
+        {
+            type: 'block',
+            id: 'total'
+        }
+    ]
+});
+sendForm({
+    formId: '#form3', 
+    someElem: [
+        {
+            type: 'block',
+            id: 'total'
+        }
+    ]
+});
+
+maskPhone('input[name="user_phone"]', '+7 (___) ___-__-__');
 
