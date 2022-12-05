@@ -60,9 +60,7 @@ export const sendForm = ({ formId, someElem = [] }) => {
                 .catch(error => {
                     statusBlock.textContent = errorText;
                 });
-        } else {
-            alert('Данные не валидны');
-        }
+        } 
     };
 
     try {
