@@ -23,30 +23,38 @@ export const sendForm = ({ formId, someElem = [] }) => {
 
         const formData = new FormData(form);
         const formBody = {};
-        loadText.classList.add('loader');
-        statusBlock.append(loadText);
-        
-        form.append(statusBlock);
 
         formData.forEach((val, key) => {
-            formBody[key] = val;
+            if(val !== '') {
+                formBody[key] = val;
+            }
+            
         });
 
         someElem.forEach(elem => {
             const element = document.getElementById(elem.id);
-
-            if (elem.type === 'block') {
-                formBody[elem.id] = element.textContent;
-            } else if (elem.type === 'input') {
-                formBody[elem.id] = element.value;
+            if(element.textContent !== '' || element.textContent !== '0') {
+                if (elem.type === 'block') {
+                    formBody[elem.id] = element.textContent;
+                } else if (elem.type === 'input') {
+                    if(element.value > 0) {
+                        formBody[elem.id] = element.value;
+                    }
+                    
+                }
             }
+            
 
         });
 
         if (checkValidate(formElements)) {
+            loadText.classList.add('loader');
+            statusBlock.append(loadText);
+            form.append(statusBlock);
             sendData(formBody)
                 .then(data => {
                     statusBlock.innerHTML = successText;
+                    setTimeout(()=>statusBlock.innerHTML = '',3000);
                     formElements.forEach(input => {
                         input.value = '';
                     });

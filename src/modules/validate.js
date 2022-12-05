@@ -28,7 +28,10 @@ const validate = () => {
             }
             if(input.type === 'tel') {
                 input.addEventListener('input', ({target}) => {
-                    target.value = target.value.replaceAll(/[^0-9()-]/gi, '');
+
+                    if(target.classList.contains('error') && checkValidate([target])) {
+                        target.classList.remove('error');
+                    }
                 });
             }
         });
